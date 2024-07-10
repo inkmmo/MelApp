@@ -6,7 +6,6 @@ public static class TranslationKeywords
     public const string About2 = "About2";
     public const string About3 = "About3";
     public const string About4 = "About4";
-    public const string ScrollingNavGitHub = "ScrollingNavGitHub";
     public const string Welcome1 = "Welcome1";
     public const string Welcome2 = "Welcome2";
     public const string Welcome3 = "Welcome3";

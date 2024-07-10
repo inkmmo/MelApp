@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using Melapp.Models.Constants;
 using Melapp.Services.Interfaces;
 
 namespace Melapp.Services;
@@ -32,8 +33,8 @@ public class ApplicationLanguageService : IApplicationLanguageService
     public void SetLanguage(string language)
     {
         if (string.IsNullOrEmpty(language))
-            language = "english";
-        var rawLanguageJson = File.ReadAllText($"wwwroot/sample-data/{language.ToLower()}.json");
+            language = ApplicationConstants.English.ToLower();
+        var rawLanguageJson = File.ReadAllText( ApplicationConstants.LanguageFile(language));
         Translations = JsonSerializer.Deserialize<Dictionary<string, string>>
             (rawLanguageJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
@@ -48,7 +49,7 @@ public class ApplicationLanguageService : IApplicationLanguageService
     {
         var availableLanguages = new List<string>();
 
-        var files = Directory.GetFiles("wwwroot/sample-data/");
+        var files = Directory.GetFiles(ApplicationConstants.LanguagesDirectory);
         foreach (var file in files)
         {
             var fi = new FileInfo(file);
