@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using WebWindows.Blazor;
 
-namespace BlazorDesktopApp
+namespace Melapp
 {
     public class Startup
     {

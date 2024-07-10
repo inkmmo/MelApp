@@ -1,7 +1,7 @@
 ﻿using WebWindows.Blazor;
 using System;
 
-namespace BlazorDesktopApp
+namespace Melapp
 {
     public class Program
     {

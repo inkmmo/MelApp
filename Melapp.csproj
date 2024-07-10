@@ -14,10 +14,7 @@
     <Content Update="wwwroot\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="wwwroot\Extensions\UrlHelper.cs" />
+    <Content Include="Extensions\UrlHelper.cs" />
   </ItemGroup>
 
 </Project>
