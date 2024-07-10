@@ -1,0 +1,25 @@
+@page "/about"
+@using Melapp.Extensions
+
+<div class="container px-4">
+    <h1 class="fw-bolder">About Melapp!</h1>
+    <p class="lead lead-justify text-justify">Mela! The App! I wrote this application as I need to learn Maltese language.
+        For me, a typical European, Maltese words are very difficult to memorise since 60-70% of that language is Arabic.
+        English is not my native language either, thus I came up with the idea to learn trough flashcards but using my 
+        native Serbian words. I have found some flashcards programs on Linux but none of them had the simple approach 
+        that I want and quiz the way I wanted. In that case, I will make my own free and open source application.</p>
+    <p class="lead lead-justify text-justify">A special thanks to my friend and colleague Carlos Rueda Valenzuela for
+        suggesting the name for the application. In Maltese, 'mela' is used very often so Carlos suggested to combine
+        'mela' and 'app' as the name.</p>
+    <p class="lead">Original source code for the template can be found 
+        <a class="btn btn-lg btn-light"@onclick="() => BrowseAddress(_scrolingNavUrl)">at github.</a></p>
+</div>
+
+@code
+{
+    private readonly string _scrolingNavUrl = "https://github.com/startbootstrap/startbootstrap-scrolling-nav";
+    private void BrowseAddress(string url)
+    {
+        UrlHelper.Open(url); 
+    }
+}
