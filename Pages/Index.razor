@@ -1,7 +1,28 @@
 @page "/"
+@using Melapp.Models.Constants
+@using Melapp.Services.Interfaces
+
+@inject IApplicationLanguageService ApplicationLanguageService;
 
 <div class="container px-4 text-center">
-    <h1 class="fw-bolder">Welcome to Melapp!</h1>
-    <p class="lead">This application is a typical flashcards application where user has to input manually collections and then play quizzes to learn words in a fun way!</p>
-    <a class="btn btn-lg btn-light" href="collections">Start learning!</a>
+    <h1 class="fw-bolder">@ApplicationLanguageService.GetPhrase(TranslationKeywords.Welcome1)</h1>
+    <p class="lead">@ApplicationLanguageService.GetPhrase(TranslationKeywords.Welcome2)</p>
+
+    <select id="condition" @bind="@ApplicationLanguageService.SeletedLanguage">
+        @foreach(string language in _options)
+        {
+            <option value="@language">@language</option>
+        }
+    </select>
 </div>
+
+@code
+{
+    private List<string> _options = new List<string> { "English" };
+    
+    protected override Task OnInitializedAsync()
+    {
+        _options = ApplicationLanguageService.GetLanguages();
+        return Task.CompletedTask;
+    }
+}

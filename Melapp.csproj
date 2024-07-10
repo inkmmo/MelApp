@@ -15,6 +15,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Extensions\UrlHelper.cs" />
+    <Content Update="wwwroot\sample-data\english.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Models\Enums\" />
   </ItemGroup>
 
 </Project>

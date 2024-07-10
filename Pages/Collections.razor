@@ -1,57 +1,51 @@
 ﻿@page "/collections"
 @using System.IO
 @using System.Text.Json
+@using Melapp.Models
 
-<h1>Weather forecast</h1>
+<h1>Collections</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>Here you can create or modify your collections</p>
 
-@if (forecasts == null)
+@if (_collections == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
+    <p>
+        <table class="table text-light">
+            <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Collection</th>
+                <th>Description</th>
+                <th>Entries</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
+            </thead>
+            <tbody>
+            @foreach (var forecast in _collections)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@forecast.Name</td>
+                    <td>@forecast.Description</td>
+                    <td>@forecast.Entries</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
                 </tr>
             }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </p>
 }
 
 @code {
-    WeatherForecast[] forecasts;
+    CollectionListEntry[] _collections;
 
     protected override async Task OnInitializedAsync()
     {
         var forecastsJson = await File.ReadAllTextAsync("wwwroot/sample-data/weather.json");
-        forecasts = JsonSerializer.Deserialize<WeatherForecast[]>(forecastsJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-    }
-
-    public class WeatherForecast
-    {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        _collections = JsonSerializer.Deserialize<CollectionListEntry[]>(forecastsJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
 }

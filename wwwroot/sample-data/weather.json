@@ -1,32 +1,27 @@
 ﻿[
   {
-    "date": "2018-05-06",
-    "temperatureC": 1,
-    "summary": "Freezing",
-    "temperatureF": 33
+    "name": "Serbian-Maltese",
+    "description": "A collection of various words",
+    "entries": "10/23"
   },
   {
-    "date": "2018-05-07",
-    "temperatureC": 14,
-    "summary": "Bracing",
-    "temperatureF": 57
+    "name": "2018-05-07",
+    "description": "description",
+    "entries": "Bracing"
   },
   {
-    "date": "2018-05-08",
-    "temperatureC": -13,
-    "summary": "Freezing",
-    "temperatureF": 9
+    "name": "2018-05-08",
+    "description": "description",
+    "entries": "Freezing"
   },
   {
-    "date": "2018-05-09",
-    "temperatureC": -16,
-    "summary": "Balmy",
-    "temperatureF": 4
+    "name": "2018-05-09",
+    "description": "description",
+    "entries": "Balmy"
   },
   {
-    "date": "2018-05-10",
-    "temperatureC": -2,
-    "summary": "Chilly",
-    "temperatureF": 29
+    "name": "2018-05-10",
+    "description": "description",
+    "entries": "Chilly"
   }
 ]
