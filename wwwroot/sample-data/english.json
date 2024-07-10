@@ -21,5 +21,14 @@
   "TagColour":  "Colour",
   "TagTime":  "Time",
   "TagWeather":  "Weather",
-  "TagAppliance":  "Appliance"
+  "TagAppliance":  "Appliance",
+  "Loading": "Loading...",
+  "CollectionsManager": "Here you can manage your collections",
+  "Collections": "Collections",
+  "Collection": "Collection",
+  "Description": "Description",
+  "Entries": "Entries",
+  "Edit": "Edit",
+  "Delete": "Delete",
+  "New": "New"
 }

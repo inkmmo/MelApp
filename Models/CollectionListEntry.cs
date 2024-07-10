@@ -1,5 +1,3 @@
-using System;
-
 namespace Melapp.Models;
 
 public class CollectionListEntry

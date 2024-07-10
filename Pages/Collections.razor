@@ -2,14 +2,18 @@
 @using System.IO
 @using System.Text.Json
 @using Melapp.Models
+@using Melapp.Models.Constants
+@using Melapp.Services.Interfaces
 
-<h1>Collections</h1>
+@inject IApplicationLanguageService ApplicationLanguageService
 
-<p>Here you can create or modify your collections</p>
+<h1>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Collections)</h1>
+
+<p>@ApplicationLanguageService.GetPhrase(TranslationKeywords.CollectionsManager)</p>
 
 @if (_collections == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Loading)</em></p>
 }
 else
 {
@@ -17,24 +21,43 @@ else
         <table class="table text-light">
             <thead>
             <tr>
-                <th>Collection</th>
-                <th>Description</th>
-                <th>Entries</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Collection)</th>
+                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Description)</th>
+                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Entries)</th>
+                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Edit)</th>
+                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Delete)</th>
             </tr>
             </thead>
             <tbody>
-            @foreach (var forecast in _collections)
+            @foreach (var collection in _collections)
             {
                 <tr>
-                    <td>@forecast.Name</td>
-                    <td>@forecast.Description</td>
-                    <td>@forecast.Entries</td>
-                    <td>Edit</td>
-                    <td>Delete</td>
+                    <td>@collection.Name</td>
+                    <td>@collection.Description</td>
+                    <td>@collection.Entries</td>
+                    <td>
+                        <a class="btn btn-lg btn-light" @onclick="() => Edit(collection.Name)">
+                            @ApplicationLanguageService.GetPhrase(TranslationKeywords.Edit)
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-lg btn-light" @onclick="() => Delete(collection.Name)">
+                            @ApplicationLanguageService.GetPhrase(TranslationKeywords.Delete)
+                        </a>
+                    </td>
                 </tr>
             }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="btn btn-lg btn-light" href="newcollection">
+                        @ApplicationLanguageService.GetPhrase(TranslationKeywords.New)
+                    </a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </p>
@@ -47,5 +70,15 @@ else
     {
         var forecastsJson = await File.ReadAllTextAsync("wwwroot/sample-data/weather.json");
         _collections = JsonSerializer.Deserialize<CollectionListEntry[]>(forecastsJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+    }
+
+    private Task Edit(string collectionName)
+    {
+        throw new NotImplementedException();
+    }
+
+    private Task Delete(string collectionName)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -24,5 +24,13 @@ public static class TranslationKeywords
     public const string TagTime = "TagTime";
     public const string TagWeather = "TagWeather";
     public const string TagAppliance = "TagAppliance";
-
+    public const string Loading = "Loading";
+    public const string CollectionsManager = "CollectionsManager";
+    public const string Collections = "Collections";
+    public const string Collection = "Collection";
+    public const string Description = "Description";
+    public const string Entries = "Entries";
+    public const string Edit = "Edit";
+    public const string Delete = "Delete";
+    public const string New = "New";
 }
