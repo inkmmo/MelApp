@@ -1,0 +1,103 @@
+@page "/collectionedit/{name}"
+@using Melapp.Models
+@using Melapp.Models.Constants
+@using Melapp.Services.Interfaces
+
+@inject IApplicationLanguageService ApplicationLanguageService
+<div class="fixed-container" style="padding-top: 3.3rem">
+    <div class="fixed-header px-4 text-center">
+        <h1>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Collection) @ApplicationLanguageService.GetPhrase(TranslationKeywords.Edit)</h1>
+        <p>@ApplicationLanguageService.GetPhrase(TranslationKeywords.CollectionName): @_name</p>
+    </div>
+    @if (Rows.Count() == 0)
+    {
+        <p><em>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Loading)</em></p>
+    }
+    else
+    {
+        <div class="scrollable-content" style="padding: 1rem">
+            <div class="container px-4 text-left">
+                <table class="table text-light">
+                    <thead>
+                    <tr>
+                        <th><input id="value1" type="text" @bind="_value1"  @oninput="OnNameEdit"/></th>
+                        <th><input id="value2" type="text" @bind="_value2"  @oninput="OnNameEdit" style="margin-right: 1rem"/></th>
+                        <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Action)</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="scrollable-content">
+            <div class="container px-4 text-left">
+                <table class="table text-light">
+                    <tbody>
+                    @foreach (var row in Rows)
+                    {
+                        <tr>
+                            @* <td>@row.RowNumber</td> *@
+                            <td><input type="text" @bind="row.Value1" @oninput="() => OnRowEdited(row)"/></td>
+                            <td><input type="text" @bind="row.Value2" @oninput="() => OnRowEdited(row)"/></td>
+                            <td><button @onclick="() => DeleteRow(row)">Delete</button></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private string _name = "New collection";
+    private int _nextRowNumber = 1;
+    private string _value1 = "Value1";
+    private string _value2 = "Value2";
+    
+    private List<CollectionEntry> Rows { get; set; } = new List<CollectionEntry>();
+
+    protected override void OnInitialized()
+    {
+        AddNewRow();
+    }
+
+    private void AddNewRow()
+    {
+        Rows.Add(new CollectionEntry { RowNumber = _nextRowNumber++ });
+    }
+
+    private void DeleteRow(CollectionEntry row)
+    {
+        if(string.IsNullOrEmpty(row.Value1) && string.IsNullOrEmpty(row.Value2))
+            return;   
+        Rows.Remove(row);
+    }
+
+    private void OnRowEdited(CollectionEntry row)
+    {
+        OnNameEdit();
+        if(!Rows.Any(x => string.IsNullOrEmpty(x.Value1 ) && string.IsNullOrEmpty(x.Value2)))
+            AddNewRow();
+    }
+
+    private void OnNameEdit()
+    {
+        _name = $"{_value1}-{_value2}";
+    }
+    
+    [Parameter]
+    public string Name
+    {
+        get { return _name;}
+        set
+        {
+            _name = value;
+            if (_name.Contains("-"))
+            {
+                var nameParts = _name.Split("-");
+                _value1 = nameParts[0] ?? _value1;
+                _value2 = nameParts[1] ?? _value2;
+            }
+        }
+    }
+}

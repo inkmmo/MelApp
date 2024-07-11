@@ -24,11 +24,13 @@
   "TagAppliance":  "Appliance",
   "Loading": "Loading...",
   "CollectionsManager": "Here you can manage your collections",
-  "Collections": "Collections",
+  "Collections": "Collections management",
   "Collection": "Collection",
   "Description": "Description",
   "Entries": "Entries",
   "Edit": "Edit",
   "Delete": "Delete",
-  "New": "New"
+  "New": "New",
+  "CollectionName": "Name",
+  "Action": "Action"
 }

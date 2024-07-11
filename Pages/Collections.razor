@@ -6,62 +6,60 @@
 @using Melapp.Services.Interfaces
 
 @inject IApplicationLanguageService ApplicationLanguageService
-
-<h1>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Collections)</h1>
-
-<p>@ApplicationLanguageService.GetPhrase(TranslationKeywords.CollectionsManager)</p>
-
+<div class="fixed-container">
+    <div class="fixed-header px-4 text-left">
+        <h1>Static Header</h1>
+        <h1>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Collections)</h1>
+        <p>@ApplicationLanguageService.GetPhrase(TranslationKeywords.CollectionsManager)</p>
+    </div>
 @if (_collections == null)
 {
     <p><em>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Loading)</em></p>
 }
 else
 {
-    <p>
-        <table class="table text-light">
-            <thead>
-            <tr>
-                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Collection)</th>
-                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Description)</th>
-                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Entries)</th>
-                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Edit)</th>
-                <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Delete)</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var collection in _collections)
-            {
+    <div style="padding: 1rem">
+        <div class="container px-4 text-left">
+            <a class="btn btn-sm btn-light" style="margin-bottom: 3rem"  href="collectionedit/New.Collection.Name">
+                @ApplicationLanguageService.GetPhrase(TranslationKeywords.New)
+            </a>
+            <table class="table text-light">
+                <thead>
                 <tr>
-                    <td>@collection.Name</td>
-                    <td>@collection.Description</td>
-                    <td>@collection.Entries</td>
-                    <td>
-                        <a class="btn btn-lg btn-light" @onclick="() => Edit(collection.Name)">
-                            @ApplicationLanguageService.GetPhrase(TranslationKeywords.Edit)
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn btn-lg btn-light" @onclick="() => Delete(collection.Name)">
-                            @ApplicationLanguageService.GetPhrase(TranslationKeywords.Delete)
-                        </a>
-                    </td>
+                    <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Edit)</th>
+                    <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Delete)</th>
+                    <th>@ApplicationLanguageService.GetPhrase(TranslationKeywords.Description)</th>
                 </tr>
-            }
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <a class="btn btn-lg btn-light" href="newcollection">
-                        @ApplicationLanguageService.GetPhrase(TranslationKeywords.New)
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </p>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="scrollable-content">
+        <div class="container px-4 text-left">
+            <table class="table text-light">
+                <tbody>
+                @foreach (var collection in _collections)
+                {
+                    <tr>
+                        <td>
+                            <a class="btn btn-sm btn-light" href="collectionedit/@collection.Name">
+                                @ApplicationLanguageService.GetPhrase(TranslationKeywords.Edit)
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-light" @onclick="() => Delete(collection.Name)">
+                                @ApplicationLanguageService.GetPhrase(TranslationKeywords.Delete)
+                            </a>
+                        </td>
+                        <td>@collection.Name (@collection.Entries)</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
 }
+</div>
 
 @code {
     CollectionListEntry[] _collections;
@@ -70,11 +68,6 @@ else
     {
         var forecastsJson = await File.ReadAllTextAsync("wwwroot/sample-data/weather.json");
         _collections = JsonSerializer.Deserialize<CollectionListEntry[]>(forecastsJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-    }
-
-    private Task Edit(string collectionName)
-    {
-        throw new NotImplementedException();
     }
 
     private Task Delete(string collectionName)
